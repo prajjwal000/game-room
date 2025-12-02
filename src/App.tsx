@@ -23,7 +23,7 @@ function App() {
 
 
         set_padel1(prev => {
-            let new_x = prev.x;
+            const new_x = prev.x;
             let new_y = prev.y;
 
             if (pressed_keys.current['ArrowUp']) {
@@ -37,7 +37,7 @@ function App() {
         });
 
         set_padel2(prev => {
-            let new_x = prev.x;
+            const new_x = prev.x;
             let new_y = prev.y;
 
             if (pressed_keys.current['w']) {
@@ -60,7 +60,7 @@ function App() {
                 cancelAnimationFrame(animation_frame_id.current);
             }
         }
-    }, []);
+    },);
 
     useEffect(() => {
         const handle_key_down = (e: KeyboardEvent) => {
