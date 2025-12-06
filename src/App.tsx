@@ -1,17 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-type vec_2d = {
-    x: number;
-    y: number;
-};
-
 const GAMESPEED = 0.5;
 
 function App() {
-    const { width, height } = useWindowSize();
-    const [padle1, set_padel1] = useState<vec_2d>({ x: 1, y: height / 2 - 75 });
-    const [padle2, set_padel2] = useState<vec_2d>({ x: width - 16, y: height / 2 - 75 });
+    const window_props = useWindowProps();
+    const [padle1, set_padle1] = window_props.padle1
+    const [padle2, set_padle2] = window_props.padle2
 
     const animation_frame_id = useRef<null | number>(null);
     const last_update_time = useRef(0);
@@ -22,7 +17,7 @@ function App() {
         last_update_time.current = timestamp;
 
 
-        set_padel1(prev => {
+        set_padle1(prev => {
             const new_x = prev.x;
             let new_y = prev.y;
 
@@ -36,7 +31,7 @@ function App() {
             return { x: new_x, y: new_y };
         });
 
-        set_padel2(prev => {
+        set_padle2(prev => {
             const new_x = prev.x;
             let new_y = prev.y;
 
@@ -86,7 +81,7 @@ function App() {
     )
 }
 
-function Padel({ pos }: { pos: vec_2d }) {
+function Padel({ pos }: { pos: { x: number, y: number } }) {
 
     return (
         <div className="bg-white absolute w-[15px] h-[150px] "
@@ -98,18 +93,19 @@ function Padel({ pos }: { pos: vec_2d }) {
     )
 }
 
-function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
-    });
+function useWindowProps() {
+    const [padle1, set_padle1] = useState({ x: 1, y: window.innerHeight / 2 - 75 });
+    const [padle2, set_padle2] = useState({ x: window.innerWidth - 16, y: window.innerHeight / 2 - 75 });
+    const prev_window = useRef({ width: window.innerWidth, height: window.innerHeight })
 
     useEffect(() => {
         function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
+            const curr = { width: innerWidth, height: window.innerHeight }
+            console.log(curr)
+
+            set_padle1({ x: 1, y: window.innerHeight / 2 - 75 })
+            set_padle2({ x: window.innerWidth - 16, y: window.innerHeight / 2 - 75 })
+            prev_window.current = { width: window.innerWidth, height: window.innerHeight }
         }
 
         window.addEventListener('resize', handleResize);
@@ -117,7 +113,7 @@ function useWindowSize() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    return windowSize;
+    return { padle1: [padle1, set_padle1], padle2: [padle2, set_padle2] } as const;
 }
 
 export default App
