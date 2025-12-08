@@ -5,6 +5,7 @@ const GAMESPEED = 0.5;
 
 function App() {
     const window_props = useWindowProps();
+    // const [windowDimensions, setWindowDimensions] = window_props.windowDimensions
     const [padle1, set_padle1] = window_props.padle1
     const [padle2, set_padle2] = window_props.padle2
 
@@ -94,6 +95,7 @@ function Padel({ pos }: { pos: { x: number, y: number } }) {
 }
 
 function useWindowProps() {
+    const [windowDimensions, setWindowDimensions] = useState({width: window.innerWidth, height: window.innerWidth})
     const [padle1, set_padle1] = useState({ x: 1, y: window.innerHeight / 2 - 75 });
     const [padle2, set_padle2] = useState({ x: window.innerWidth - 16, y: window.innerHeight / 2 - 75 });
     const prev_window = useRef({ width: window.innerWidth, height: window.innerHeight })
@@ -113,7 +115,7 @@ function useWindowProps() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    return { padle1: [padle1, set_padle1], padle2: [padle2, set_padle2] } as const;
+    return {windowDimensions: [windowDimensions, setWindowDimensions], padle1: [padle1, set_padle1], padle2: [padle2, set_padle2] } as const;
 }
 
 export default App

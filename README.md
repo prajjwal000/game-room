@@ -1,1 +1,1 @@
-Online multiplayer pong game written using react and microservices.
+Online multiplayer maze solving game with cool visuals
