@@ -8,7 +8,7 @@ function App() {
         navigate('/game')
     }
     return (
-        <div className="">
+        <div className="bg-black w-screen h-screen">
             <Button onClick={handleClick}> Create room </Button>
             <Button onClick={handleClick}> Join room </Button>
         </div>

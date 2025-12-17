@@ -1,13 +1,20 @@
 // import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import './App.css';
+import { Button } from './components/ui/button';
 
 function Game() {
 
+    const navigate = useNavigate();
+    function handleClick(){
+        navigate('/')
+    }
+
     return (
         <>
-            <Link to="/">Exit</Link>
-            <h1> Game is here </h1>
+            <div className='bg-black w-screen h-screen'>
+                <Button onClick={handleClick}>Leave</Button>
+            </div>
         </>
     )
 }
