@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router';
-import { Button } from '@/components/ui/button'
 import './App.css';
 
 function App() {
@@ -8,9 +7,9 @@ function App() {
         navigate('/game')
     }
     return (
-        <div className="bg-black w-screen h-screen">
-            <Button onClick={handleClick}> Create room </Button>
-            <Button onClick={handleClick}> Join room </Button>
+        <div className="bg-black w-screen h-screen text-white">
+            <button onClick={handleClick} className='bg-gray-700'> Create room </button>
+            <button onClick={handleClick} className='bg-gray-700'> Join room </button>
         </div>
     )
 }

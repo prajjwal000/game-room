@@ -1,9 +1,8 @@
 // import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import './App.css';
-import { Button } from './components/ui/button';
 
-function Game() {
+export default function Game() {
 
     const navigate = useNavigate();
     function handleClick(){
@@ -12,11 +11,12 @@ function Game() {
 
     return (
         <>
-            <div className='bg-black w-screen h-screen'>
-                <Button onClick={handleClick}>Leave</Button>
+            <div className='bg-black w-screen h-screen text-white fixed'>
+                <button onClick={handleClick} className='bg-gray-700'>Leave</button>
+                <div className='h-screen'> </div>
+                <p> some text </p>
             </div>
         </>
     )
 }
 
-export default Game
