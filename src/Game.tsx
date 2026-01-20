@@ -5,7 +5,7 @@ import "./App.css";
 function Board() {
     return (
         <>
-            <p> lovely </p>
+            <p> Board </p>
         </>
     );
 }
@@ -40,10 +40,15 @@ export default function Game() {
 
     return (
         <>
-            <div className="bg-black w-screen h-screen text-gray-700">
-                <button onClick={handleClick} className="bg-white">
-                    Leave
-                </button>
+            <div className="bg-gray-700 w-screen h-screen">
+                <div className="flex justify-center-safe container">
+                    <button onClick={handleClick} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                        Leave
+                    </button>
+                </div>
+                <div className="container">
+                    <Board/>
+                </div>
             </div>
         </>
     );
